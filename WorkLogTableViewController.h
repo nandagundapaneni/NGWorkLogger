@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  WorkLogTableViewController.h
 //  NGWorkLogger
 //
 //  Created by Nanda Gundapaneni on 10/7/15.
@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface ViewController : UIViewController
+@interface WorkLogTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
 
 @end
-

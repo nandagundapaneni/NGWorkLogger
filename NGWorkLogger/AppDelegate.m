@@ -7,8 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import <CoreLocation/CoreLocation.h>
+#import "LocationManagerSingleton.h"
+#import "ViewController.h"
+#import "WorkLog.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<CLLocationManagerDelegate>
 
 @end
 
@@ -17,6 +21,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [[LocationManagerSingleton sharedInstance] setDelegate:self];
+    [[LocationManagerSingleton sharedInstance] requestAlwaysAuthorization];
+    
+    UIUserNotificationSettings* notifSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:notifSettings];
+    
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    ViewController *controller = (ViewController *)navigationController.topViewController;
+    
+    
+    
+    controller.managedObjectContext = self.managedObjectContext;
+    
     return YES;
 }
 
@@ -44,6 +64,82 @@
     [self saveContext];
 }
 
+#pragma mark - CLLocationManagerDelegate
+
+- (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
+{
+    NSDateFormatter* formatter = [self dateFormatter];
+    
+    [formatter setDateFormat:@"EEEE, dd MMMM yyyy hh:mm a"];
+
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSManagedObject *entryLog = [NSEntityDescription
+                                       insertNewObjectForEntityForName:kWorkLogEntry
+                                       inManagedObjectContext:context];
+    
+    [entryLog setValue:[NSDate date] forKey:kEntryDate];
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Error saving data: %@", [error localizedDescription]);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCoreDataSaveErrorNotification object:error];
+    }
+    else
+    {
+        
+        NSString *dateString = [formatter stringFromDate:[NSDate date]];
+        
+        UILocalNotification* notification = [UILocalNotification new];
+        notification.alertBody = [NSString stringWithFormat:@"Entered work zone LOG: %@",dateString];
+        notification.soundName = @"Default";
+        [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+    }
+}
+
+- (void) locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
+{
+    NSDateFormatter* formatter = [self dateFormatter];
+    
+    [formatter setDateFormat:@"EEEE, dd MMMM yyyy hh:mm a"];
+
+    
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSManagedObject *entryLog = [NSEntityDescription
+                                 insertNewObjectForEntityForName:kWorkLogExit
+                                 inManagedObjectContext:context];
+    
+    [entryLog setValue:[NSDate date] forKey:kExitDate];
+    
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Error saving data: %@", [error localizedDescription]);
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCoreDataSaveErrorNotification object:error];
+    }
+    else
+    {
+        
+        NSString *dateString = [formatter stringFromDate:[NSDate date]];
+        
+        UILocalNotification* notification = [UILocalNotification new];
+        notification.alertBody = [NSString stringWithFormat:@"Exited work zone LOG: %@",dateString];
+        notification.soundName = @"Default";
+        [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+    }
+
+
+}
+
+- (NSDateFormatter*) dateFormatter
+{
+    static NSDateFormatter *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [NSDateFormatter new];
+    });
+    return instance;
+    
+}
 #pragma mark - Core Data stack
 
 @synthesize managedObjectContext = _managedObjectContext;

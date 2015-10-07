@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36513F671BC5AB4E00B0FC0B /* WorkLogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36513F661BC5AB4E00B0FC0B /* WorkLogTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3679B23A1BC5758500FCBB88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3679B2391BC5758500FCBB88 /* main.m */; };
 		3679B23D1BC5758500FCBB88 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3679B23C1BC5758500FCBB88 /* AppDelegate.m */; };
 		3679B2401BC5758500FCBB88 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3679B23F1BC5758500FCBB88 /* ViewController.m */; };
@@ -16,6 +17,10 @@
 		3679B24B1BC5758500FCBB88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3679B2491BC5758500FCBB88 /* LaunchScreen.storyboard */; };
 		3679B2561BC5758600FCBB88 /* NGWorkLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3679B2551BC5758600FCBB88 /* NGWorkLoggerTests.m */; };
 		3679B2611BC5758600FCBB88 /* NGWorkLoggerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3679B2601BC5758600FCBB88 /* NGWorkLoggerUITests.m */; };
+		3679B26F1BC57C6E00FCBB88 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3679B26E1BC57C6E00FCBB88 /* MapKit.framework */; };
+		3679B2711BC57C7900FCBB88 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3679B2701BC57C7900FCBB88 /* CoreLocation.framework */; };
+		3679B2751BC580F000FCBB88 /* LocationManagerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3679B2741BC580F000FCBB88 /* LocationManagerSingleton.m */; settings = {ASSET_TAGS = (); }; };
+		3679B27C1BC58D5100FCBB88 /* WorkLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3679B27B1BC58D5100FCBB88 /* WorkLog.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		36513F651BC5AB4E00B0FC0B /* WorkLogTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkLogTableViewController.h; path = ../WorkLogTableViewController.h; sourceTree = "<group>"; };
+		36513F661BC5AB4E00B0FC0B /* WorkLogTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorkLogTableViewController.m; path = ../WorkLogTableViewController.m; sourceTree = "<group>"; };
+		36513F6B1BC5B49200B0FC0B /* NGWorkLogger-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NGWorkLogger-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		3679B2351BC5758500FCBB88 /* NGWorkLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NGWorkLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3679B2391BC5758500FCBB88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3679B23B1BC5758500FCBB88 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -53,6 +61,12 @@
 		3679B25C1BC5758600FCBB88 /* NGWorkLoggerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NGWorkLoggerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3679B2601BC5758600FCBB88 /* NGWorkLoggerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NGWorkLoggerUITests.m; sourceTree = "<group>"; };
 		3679B2621BC5758600FCBB88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3679B26E1BC57C6E00FCBB88 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3679B2701BC57C7900FCBB88 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3679B2731BC580F000FCBB88 /* LocationManagerSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManagerSingleton.h; sourceTree = "<group>"; };
+		3679B2741BC580F000FCBB88 /* LocationManagerSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManagerSingleton.m; sourceTree = "<group>"; };
+		3679B27A1BC58D5100FCBB88 /* WorkLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkLog.h; sourceTree = "<group>"; };
+		3679B27B1BC58D5100FCBB88 /* WorkLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkLog.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3679B2711BC57C7900FCBB88 /* CoreLocation.framework in Frameworks */,
+				3679B26F1BC57C6E00FCBB88 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				3679B2371BC5758500FCBB88 /* NGWorkLogger */,
+				3679B2721BC57C8000FCBB88 /* Frameworks */,
 				3679B2541BC5758600FCBB88 /* NGWorkLoggerTests */,
 				3679B25F1BC5758600FCBB88 /* NGWorkLoggerUITests */,
 				3679B2361BC5758500FCBB88 /* Products */,
@@ -103,10 +120,15 @@
 		3679B2371BC5758500FCBB88 /* NGWorkLogger */ = {
 			isa = PBXGroup;
 			children = (
+				3679B2761BC58C6500FCBB88 /* Model */,
 				3679B23B1BC5758500FCBB88 /* AppDelegate.h */,
 				3679B23C1BC5758500FCBB88 /* AppDelegate.m */,
+				3679B2731BC580F000FCBB88 /* LocationManagerSingleton.h */,
+				3679B2741BC580F000FCBB88 /* LocationManagerSingleton.m */,
 				3679B23E1BC5758500FCBB88 /* ViewController.h */,
 				3679B23F1BC5758500FCBB88 /* ViewController.m */,
+				36513F651BC5AB4E00B0FC0B /* WorkLogTableViewController.h */,
+				36513F661BC5AB4E00B0FC0B /* WorkLogTableViewController.m */,
 				3679B2411BC5758500FCBB88 /* Main.storyboard */,
 				3679B2471BC5758500FCBB88 /* Assets.xcassets */,
 				3679B2491BC5758500FCBB88 /* LaunchScreen.storyboard */,
@@ -120,6 +142,7 @@
 		3679B2381BC5758500FCBB88 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				36513F6B1BC5B49200B0FC0B /* NGWorkLogger-Prefix.pch */,
 				3679B2391BC5758500FCBB88 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -141,6 +164,24 @@
 				3679B2621BC5758600FCBB88 /* Info.plist */,
 			);
 			path = NGWorkLoggerUITests;
+			sourceTree = "<group>";
+		};
+		3679B2721BC57C8000FCBB88 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3679B2701BC57C7900FCBB88 /* CoreLocation.framework */,
+				3679B26E1BC57C6E00FCBB88 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3679B2761BC58C6500FCBB88 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3679B27A1BC58D5100FCBB88 /* WorkLog.h */,
+				3679B27B1BC58D5100FCBB88 /* WorkLog.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,6 +251,11 @@
 				TargetAttributes = {
 					3679B2341BC5758500FCBB88 = {
 						CreatedOnToolsVersion = 7.0.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					3679B2501BC5758600FCBB88 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -274,9 +320,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3679B2401BC5758500FCBB88 /* ViewController.m in Sources */,
+				3679B27C1BC58D5100FCBB88 /* WorkLog.m in Sources */,
+				3679B2751BC580F000FCBB88 /* LocationManagerSingleton.m in Sources */,
 				3679B2461BC5758500FCBB88 /* NGWorkLogger.xcdatamodeld in Sources */,
 				3679B23D1BC5758500FCBB88 /* AppDelegate.m in Sources */,
 				3679B23A1BC5758500FCBB88 /* main.m in Sources */,
+				36513F671BC5AB4E00B0FC0B /* WorkLogTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +464,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NGWorkLogger-Prefix.pch";
 				INFOPLIST_FILE = NGWorkLogger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanda.NGWorkLogger;
@@ -426,6 +477,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NGWorkLogger-Prefix.pch";
 				INFOPLIST_FILE = NGWorkLogger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanda.NGWorkLogger;
@@ -500,6 +553,7 @@
 				3679B2671BC5758600FCBB88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3679B2681BC5758600FCBB88 /* Build configuration list for PBXNativeTarget "NGWorkLoggerTests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +562,7 @@
 				3679B26A1BC5758600FCBB88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3679B26B1BC5758600FCBB88 /* Build configuration list for PBXNativeTarget "NGWorkLoggerUITests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +571,7 @@
 				3679B26D1BC5758600FCBB88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
