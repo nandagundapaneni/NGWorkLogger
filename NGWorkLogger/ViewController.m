@@ -53,9 +53,6 @@
 {
     [super viewWillAppear:animated];
 
-    for (CLRegion* region in self.locationManager.monitoredRegions) {
-        NSLog(@"REG %@",region);
-    }
 }
 
 - (IBAction)monitorCurrentLocation:(id)sender {
