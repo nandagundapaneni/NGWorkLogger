@@ -11,7 +11,6 @@
 #import <CoreLocation/CoreLocation.h>
 #import "WorkLog.h"
 #import "WorkLogTableViewController.h"
-
 #define kWorkZoneLocation @"kWorkZoneLocation"
 #define kDefaultDistance 250
 #define kDefaultSpanDistance 1000
@@ -36,9 +35,17 @@
     // Do any additional setup after loading the view, typically from a nib.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showCoreDateSaveError:) name:kCoreDataSaveErrorNotification object:nil];
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    [self.locationManager setDelegate:self];
-    [self.locationManager requestAlwaysAuthorization];
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        [self.locationManager setDelegate:self];
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    else
+    {
+        NSError* error = [NSError errorWithDomain:@"CLLOCATION" code:5 userInfo:@{@"desc":@"locationServices disabled"}];
+        [self showAlertForError:error];
+    }
+    
     
    }
 
@@ -46,6 +53,9 @@
 {
     [super viewWillAppear:animated];
 
+    for (CLRegion* region in self.locationManager.monitoredRegions) {
+        NSLog(@"REG %@",region);
+    }
 }
 
 - (IBAction)monitorCurrentLocation:(id)sender {
@@ -60,7 +70,7 @@
 {
     [self clearCoreDataLogs];
     
-    CLCircularRegion* regionC = [[CLCircularRegion alloc] initWithCenter:self.circle.coordinate radius:kDefaultDistance identifier:kWorkZoneLocation];
+    CLCircularRegion* regionC = [[CLCircularRegion alloc] initWithCenter:self.circle.coordinate radius:kDefaultDistance identifier:[[NSUUID UUID] UUIDString]];
     
     if ([CLLocationManager isMonitoringAvailableForClass:[CLCircularRegion class]] && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
         [self.locationManager startMonitoringForRegion:regionC];
@@ -262,6 +272,12 @@
 
 - (void) showAlertForError:(NSError*)error
 {
+    
+    NSString* body = error.localizedDescription;
+    
+    if (body.length == 0 || body == nil) {
+        body = error.userInfo[@"desc"];
+    }
     UIAlertController* controller = [UIAlertController alertControllerWithTitle:@"ERROR" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
