@@ -67,7 +67,13 @@
 {
     [self clearCoreDataLogs];
     
+    
+    for (CLRegion* region in self.locationManager.monitoredRegions) {
+        [self.locationManager stopMonitoringForRegion:region];
+    }
+    
     CLCircularRegion* regionC = [[CLCircularRegion alloc] initWithCenter:self.circle.coordinate radius:kDefaultDistance identifier:[[NSUUID UUID] UUIDString]];
+    
     
     if ([CLLocationManager isMonitoringAvailableForClass:[CLCircularRegion class]] && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
         [self.locationManager startMonitoringForRegion:regionC];
