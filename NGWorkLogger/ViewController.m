@@ -45,8 +45,7 @@
         NSError* error = [NSError errorWithDomain:@"CLLOCATION" code:5 userInfo:@{@"desc":@"locationServices disabled"}];
         [self showAlertForError:error];
     }
-    
-    
+
    }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -177,7 +176,6 @@
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
     if ([region isKindOfClass:[CLCircularRegion class]]) {
-        [self showAlertForEnteringExitingWorkSpace:YES];
         
         NSDateFormatter* formatter = [self dateFormatter];
         
@@ -201,8 +199,10 @@
             
             NSString *dateString = [formatter stringFromDate:[NSDate date]];
             
+            NSString* alertBody = [NSString stringWithFormat:@"You entered your workspace TIME LOG:%@",dateString];
+
             UILocalNotification* notification = [UILocalNotification new];
-            notification.alertBody = [NSString stringWithFormat:@"Entered work zone LOG: %@",dateString];
+            notification.alertBody = alertBody;
             notification.soundName = @"Default";
             [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
         }
@@ -214,7 +214,6 @@
 - (void) locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
     if ([region isKindOfClass:[CLCircularRegion class]]) {
-        [self showAlertForEnteringExitingWorkSpace:NO];
         
         NSDateFormatter* formatter = [self dateFormatter];
         
@@ -238,10 +237,13 @@
             
             NSString *dateString = [formatter stringFromDate:[NSDate date]];
             
+            NSString* alertBody = [NSString stringWithFormat:@"You exited your workspace TIME LOG:%@",dateString];
+            
             UILocalNotification* notification = [UILocalNotification new];
-            notification.alertBody = [NSString stringWithFormat:@"Exited work zone LOG: %@",dateString];
+            notification.alertBody = alertBody;
             notification.soundName = @"Default";
             [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+
         }
 
     }

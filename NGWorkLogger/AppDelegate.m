@@ -60,7 +60,23 @@
     [self saveContext];
 }
 
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIApplicationState applicationState = application.applicationState;
+    if (applicationState == UIApplicationStateBackground) {
+        [application presentLocalNotificationNow:notification];
+    }
+    else if (applicationState == UIApplicationStateActive)
+    {
+        UIAlertController* controller = [UIAlertController alertControllerWithTitle:notification.alertTitle message:notification.alertBody preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+        [controller addAction:okAction];
+        
+        [self.window.rootViewController presentViewController:controller animated:YES completion:nil];
 
+    }
+}
 
 
 #pragma mark - Core Data stack
