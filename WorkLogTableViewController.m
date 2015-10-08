@@ -133,11 +133,14 @@
     
     WorkLogEntry* entry = self.workLog.entries[indexPath.section];
     
+    NSInteger exitIndex = [self getIndexOfExitForEntry:indexPath.section];
+    
     WorkLogExit* exit;
     
-    if (self.workLog.exits.count > indexPath.section) {
-        exit = self.workLog.exits[indexPath.section];
+    if (exitIndex > 0) {
+        exit = self.workLog.exits[exitIndex];
     }
+    
     
     NSDateFormatter* formatter = [self dateFormatter];
     
@@ -181,6 +184,19 @@
 
 }
 
+- (NSInteger) getIndexOfExitForEntry:(NSInteger)index
+{
+
+    NSInteger diff = self.workLog.entries.count - self.workLog.exits.count;
+    if (diff > 0) {
+        
+        return index - diff;
+    }
+    
+    return index;
+    
+    
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
