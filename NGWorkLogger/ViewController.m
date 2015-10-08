@@ -9,7 +9,6 @@
 #import "ViewController.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "LocationManagerSingleton.h"
 #import "WorkLog.h"
 #import "WorkLogTableViewController.h"
 
@@ -21,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) MKCircle* circle;
 @property (nonatomic,assign) CLLocationCoordinate2D currentCoordinate;
+@property (nonatomic, strong) CLLocationManager* locationManager;
 
 @end
 
@@ -36,8 +36,9 @@
     // Do any additional setup after loading the view, typically from a nib.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showCoreDateSaveError:) name:kCoreDataSaveErrorNotification object:nil];
     
-    [[LocationManagerSingleton sharedInstance] setDelegate:self];
-    [[LocationManagerSingleton sharedInstance] requestAlwaysAuthorization];
+    self.locationManager = [[CLLocationManager alloc] init];
+    [self.locationManager setDelegate:self];
+    [self.locationManager requestAlwaysAuthorization];
     
    }
 
@@ -58,10 +59,31 @@
 - (void) startMonitoringWorkZone
 {
     [self clearCoreDataLogs];
+    
     CLCircularRegion* regionC = [[CLCircularRegion alloc] initWithCenter:self.circle.coordinate radius:kDefaultDistance identifier:kWorkZoneLocation];
     
     if ([CLLocationManager isMonitoringAvailableForClass:[CLCircularRegion class]] && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
-        [[LocationManagerSingleton sharedInstance] startMonitoringForRegion:regionC];
+        [self.locationManager startMonitoringForRegion:regionC];
+        
+        
+        NSDateFormatter* formatter = [self dateFormatter];
+        
+        [formatter setDateFormat:@"EEEE, dd MMMM yyyy hh:mm a"];
+        
+        NSManagedObjectContext *context = [self managedObjectContext];
+        NSManagedObject *entryLog = [NSEntityDescription
+                                     insertNewObjectForEntityForName:kWorkLogEntry
+                                     inManagedObjectContext:context];
+        
+        [entryLog setValue:[NSDate date] forKey:kEntryDate];
+        
+        NSError *error;
+        if (![context save:&error]) {
+            NSLog(@"Error saving data: %@", [error localizedDescription]);
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCoreDataSaveErrorNotification object:error];
+        }
+
     }
 
 }
@@ -130,7 +152,7 @@
     [self.mapView setShowsUserLocation:(status == kCLAuthorizationStatusAuthorizedAlways)];
     
     if (status == kCLAuthorizationStatusAuthorizedAlways) {
-        [[LocationManagerSingleton sharedInstance] startUpdatingLocation];
+        [self.locationManager startUpdatingLocation];
     }
 }
 
@@ -143,6 +165,35 @@
 {
     if ([region isKindOfClass:[CLCircularRegion class]]) {
         [self showAlertForEnteringExitingWorkSpace:YES];
+        
+        NSDateFormatter* formatter = [self dateFormatter];
+        
+        [formatter setDateFormat:@"EEEE, dd MMMM yyyy hh:mm a"];
+        
+        NSManagedObjectContext *context = [self managedObjectContext];
+        NSManagedObject *entryLog = [NSEntityDescription
+                                     insertNewObjectForEntityForName:kWorkLogEntry
+                                     inManagedObjectContext:context];
+        
+        [entryLog setValue:[NSDate date] forKey:kEntryDate];
+        
+        NSError *error;
+        if (![context save:&error]) {
+            NSLog(@"Error saving data: %@", [error localizedDescription]);
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCoreDataSaveErrorNotification object:error];
+        }
+        else
+        {
+            
+            NSString *dateString = [formatter stringFromDate:[NSDate date]];
+            
+            UILocalNotification* notification = [UILocalNotification new];
+            notification.alertBody = [NSString stringWithFormat:@"Entered work zone LOG: %@",dateString];
+            notification.soundName = @"Default";
+            [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+        }
+
     }
     
 }
@@ -151,6 +202,35 @@
 {
     if ([region isKindOfClass:[CLCircularRegion class]]) {
         [self showAlertForEnteringExitingWorkSpace:NO];
+        
+        NSDateFormatter* formatter = [self dateFormatter];
+        
+        [formatter setDateFormat:@"EEEE, dd MMMM yyyy hh:mm a"];
+        
+        
+        NSManagedObjectContext *context = [self managedObjectContext];
+        NSManagedObject *entryLog = [NSEntityDescription
+                                     insertNewObjectForEntityForName:kWorkLogExit
+                                     inManagedObjectContext:context];
+        
+        [entryLog setValue:[NSDate date] forKey:kExitDate];
+        
+        NSError *error;
+        if (![context save:&error]) {
+            NSLog(@"Error saving data: %@", [error localizedDescription]);
+            [[NSNotificationCenter defaultCenter] postNotificationName:kCoreDataSaveErrorNotification object:error];
+        }
+        else
+        {
+            
+            NSString *dateString = [formatter stringFromDate:[NSDate date]];
+            
+            UILocalNotification* notification = [UILocalNotification new];
+            notification.alertBody = [NSString stringWithFormat:@"Exited work zone LOG: %@",dateString];
+            notification.soundName = @"Default";
+            [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+        }
+
     }
     
 }
@@ -227,6 +307,17 @@
     [circleView setStrokeColor:[UIColor blackColor]];
     [circleView setAlpha:0.5f];
     return circleView;
+}
+
+- (NSDateFormatter*) dateFormatter
+{
+    static NSDateFormatter *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [NSDateFormatter new];
+    });
+    return instance;
+    
 }
 
 - (void)didReceiveMemoryWarning {

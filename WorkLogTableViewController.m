@@ -63,7 +63,14 @@
             [self.workLog sortLogs];
             [self.tableView reloadData];
         }else{
-            [self showAlertForError:error];
+            
+            if (error != nil) {
+                [self showAlertForError:error];
+
+            }
+            else {
+                [self showAlertNoData];
+            }
         }
         
         
@@ -80,6 +87,18 @@
     
     [self presentViewController:controller animated:YES completion:nil];
 }
+- (void) showAlertNoData
+{
+    UIAlertController* controller = [UIAlertController alertControllerWithTitle:@"No Logs!" message:@"The app has not starting logging yet. Go back and save a location to monitor" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }];
+    [controller addAction:okAction];
+    
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
 
 #pragma mark - Table view data source
 

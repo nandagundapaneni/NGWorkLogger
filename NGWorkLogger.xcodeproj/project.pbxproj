@@ -19,7 +19,6 @@
 		3679B2611BC5758600FCBB88 /* NGWorkLoggerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3679B2601BC5758600FCBB88 /* NGWorkLoggerUITests.m */; };
 		3679B26F1BC57C6E00FCBB88 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3679B26E1BC57C6E00FCBB88 /* MapKit.framework */; };
 		3679B2711BC57C7900FCBB88 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3679B2701BC57C7900FCBB88 /* CoreLocation.framework */; };
-		3679B2751BC580F000FCBB88 /* LocationManagerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3679B2741BC580F000FCBB88 /* LocationManagerSingleton.m */; settings = {ASSET_TAGS = (); }; };
 		3679B27C1BC58D5100FCBB88 /* WorkLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3679B27B1BC58D5100FCBB88 /* WorkLog.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -63,8 +62,6 @@
 		3679B2621BC5758600FCBB88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3679B26E1BC57C6E00FCBB88 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3679B2701BC57C7900FCBB88 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		3679B2731BC580F000FCBB88 /* LocationManagerSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManagerSingleton.h; sourceTree = "<group>"; };
-		3679B2741BC580F000FCBB88 /* LocationManagerSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManagerSingleton.m; sourceTree = "<group>"; };
 		3679B27A1BC58D5100FCBB88 /* WorkLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkLog.h; sourceTree = "<group>"; };
 		3679B27B1BC58D5100FCBB88 /* WorkLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkLog.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,8 +120,6 @@
 				3679B2761BC58C6500FCBB88 /* Model */,
 				3679B23B1BC5758500FCBB88 /* AppDelegate.h */,
 				3679B23C1BC5758500FCBB88 /* AppDelegate.m */,
-				3679B2731BC580F000FCBB88 /* LocationManagerSingleton.h */,
-				3679B2741BC580F000FCBB88 /* LocationManagerSingleton.m */,
 				3679B23E1BC5758500FCBB88 /* ViewController.h */,
 				3679B23F1BC5758500FCBB88 /* ViewController.m */,
 				36513F651BC5AB4E00B0FC0B /* WorkLogTableViewController.h */,
@@ -321,7 +316,6 @@
 			files = (
 				3679B2401BC5758500FCBB88 /* ViewController.m in Sources */,
 				3679B27C1BC58D5100FCBB88 /* WorkLog.m in Sources */,
-				3679B2751BC580F000FCBB88 /* LocationManagerSingleton.m in Sources */,
 				3679B2461BC5758500FCBB88 /* NGWorkLogger.xcdatamodeld in Sources */,
 				3679B23D1BC5758500FCBB88 /* AppDelegate.m in Sources */,
 				3679B23A1BC5758500FCBB88 /* main.m in Sources */,
