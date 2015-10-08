@@ -248,7 +248,7 @@
     
 }
 
-- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray*)locations
 {
     CLLocation *location = [locations lastObject];
     
@@ -263,7 +263,7 @@
 
 - (void) showAlertForEnteringExitingWorkSpace:(BOOL)enter
 {
-    NSString* alertBody = enter?[NSString stringWithFormat:@"You entered your workspace TIME LOG:%@",[NSDate date]]:[NSString stringWithFormat:@"You entered your workspace TIME LOG:%@",[NSDate date]];
+    NSString* alertBody = enter?[NSString stringWithFormat:@"You entered your workspace TIME LOG:%@",[NSDate date]]:[NSString stringWithFormat:@"You exited your workspace TIME LOG:%@",[NSDate date]];
     UIAlertController* controller = [UIAlertController alertControllerWithTitle:@"WORK LOG" message:alertBody preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
@@ -293,7 +293,7 @@
 {
     UIAlertController* controller = [UIAlertController alertControllerWithTitle:@"Add as work zone" message:@"Would like to set current region marked on the map as your work zone? This will clear the all the data from previous work zone." preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self startMonitoringWorkZone];
     }];
     

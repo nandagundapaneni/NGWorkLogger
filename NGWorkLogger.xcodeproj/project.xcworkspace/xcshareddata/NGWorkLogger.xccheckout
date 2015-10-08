@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4E4AB567-3235-4D8B-93CD-CBC3D78563A7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>NGWorkLogger</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>105DF7D78214F23E384F4AA8764800035575B0E8</key>
+		<string>http://nanda.gundapaneni@stash.mgmt.local/scm/mob/device-registration-android.git</string>
+		<key>A000C55BA5681179F7DD2AC334C66D21A0008764</key>
+		<string>https://github.com/nandagundapaneni/NGWorkLogger.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>NGWorkLogger.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>105DF7D78214F23E384F4AA8764800035575B0E8</key>
+		<string>../../..</string>
+		<key>A000C55BA5681179F7DD2AC334C66D21A0008764</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/nandagundapaneni/NGWorkLogger.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>A000C55BA5681179F7DD2AC334C66D21A0008764</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>105DF7D78214F23E384F4AA8764800035575B0E8</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A000C55BA5681179F7DD2AC334C66D21A0008764</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NGWorkLogger</string>
+		</dict>
+	</array>
+</dict>
+</plist>
