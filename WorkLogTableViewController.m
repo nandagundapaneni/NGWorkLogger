@@ -137,7 +137,7 @@
     
     WorkLogExit* exit;
     
-    if (exitIndex > 0) {
+    if (exitIndex >= 0) {
         exit = self.workLog.exits[exitIndex];
     }
     
@@ -188,12 +188,8 @@
 {
 
     NSInteger diff = self.workLog.entries.count - self.workLog.exits.count;
-    if (diff > 0) {
-        
-        return index - diff;
-    }
     
-    return index;
+    return index-diff;
     
     
 }
