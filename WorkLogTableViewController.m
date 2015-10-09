@@ -109,14 +109,52 @@
 
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    
+    
+    
     NSDateFormatter* formatter = [self dateFormatter];
     
     [formatter setDateFormat:@"EEEE, dd MMMM yyyy"];
     
     WorkLogEntry* entry = self.workLog.entries[section];
+    
     NSString *dateString = [formatter stringFromDate:entry.entryDate];
     
-    return dateString;
+    NSInteger exitIndex = [self getIndexOfExitForEntry:section];
+    
+    WorkLogExit* exit;
+    
+    if (exitIndex >= 0) {
+        exit = self.workLog.exits[exitIndex];
+    }
+
+    double timeDiff = 0;
+    if (exit != nil) {
+        timeDiff = [self timeDiffEnter:entry.entryDate exit:exit.exitDate];
+        
+    }
+    
+    if (timeDiff == 0) {
+        return dateString;
+    }
+    
+    NSString *dateStringWithHours = @"";
+    
+    if (timeDiff > 1) {
+        dateStringWithHours = [NSString stringWithFormat:@"%@ Total Time: %.2f hours",dateString,timeDiff];
+        
+        return dateStringWithHours;
+    }
+    
+    if (timeDiff < 1 && timeDiff > 0) {
+        timeDiff = timeDiff * 60;
+        
+        dateStringWithHours = [NSString stringWithFormat:@"%@ Total Time: %.2f mintues",dateString,timeDiff];
+    }
+    
+
+    
+    return dateStringWithHours;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -141,7 +179,7 @@
         exit = self.workLog.exits[exitIndex];
     }
     
-    
+
     NSDateFormatter* formatter = [self dateFormatter];
     
     [formatter setDateFormat:@"EEEE, dd MMMM yyyy hh:mm a"];
@@ -192,6 +230,15 @@
     return index-diff;
     
     
+}
+
+- (double) timeDiffEnter:(NSDate*)entryDate exit:(NSDate*)exitDate
+{
+  
+    NSTimeInterval distanceBetweenDates = [exitDate timeIntervalSinceDate:entryDate];
+    double secondsInAnHour = 3600;
+    
+    return distanceBetweenDates / secondsInAnHour;
 }
 /*
 // Override to support conditional editing of the table view.
